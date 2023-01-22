@@ -5,9 +5,9 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
 } from '@nestjs/websockets';
+import { randomInt } from 'crypto';
 
 @WebSocketGateway({
-  // path: '/rooms/',
   cors: true,
   transports: ['websocket', 'polling'],
 })
@@ -31,6 +31,7 @@ export class MessagesGateway
 
   @SubscribeMessage('client-send-message-to-server')
   async onChat(client, message) {
-    client.emit('server-send-messages-to-clients', message);
+    console.log(randomInt(100));
+    this.server.emit('server-send-messages-to-clients', message);
   }
 }
