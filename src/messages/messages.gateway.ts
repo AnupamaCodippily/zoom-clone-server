@@ -31,7 +31,6 @@ export class MessagesGateway
 
   @SubscribeMessage('client-send-message-to-server')
   async onChat(client, message) {
-    console.log(randomInt(100));
     this.server.emit('server-send-messages-to-clients', message);
   }
 }
